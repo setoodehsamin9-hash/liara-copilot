@@ -1,0 +1,36 @@
+# Dependencies and generated builds
+node_modules/
+dist/
+dist-server/
+coverage/
+*.tsbuildinfo
+
+# Credentials, local state, source snapshots, logs and repair worktrees
+.env
+.env.*
+!.env.example
+.local/
+.codex/
+.agents/
+*.log
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+*.pem
+*.key
+
+# Browser output, delivery archives and export-specific metadata
+test-results/
+playwright-report/
+playwright/.cache/
+artifacts/
+releases/
+HANDOFF-MANIFEST.json
+
+# Editor and OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

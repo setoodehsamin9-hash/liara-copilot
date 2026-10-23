@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {readFile,mkdir,writeFile} from 'node:fs/promises';
+import {resolve} from 'node:path';
+import {Repairs} from '../server/repairs.js';
+const original=await readFile('fixtures/http500-site/app.mjs','utf8');const repairs=new Repairs();const start=await repairs.fixture();
+assert.equal(start.beforeHttp?.status,500);assert.equal(start.beforeTests.exitCode,1);
+console.log('REAL LOCAL FIXTURE: HTTP 500 and failing regression confirmed.');
+await repairs.fix(start.id,event=>{if(event.type==='progress')console.log(event.message);});
+const result=repairs.get(start.id);await mkdir('.local/verification',{recursive:true});await writeFile('.local/verification/repair.json',JSON.stringify(result,null,2));
+console.log(JSON.stringify({id:result.id,state:result.state,beforeHttp:result.beforeHttp?.status,afterHttp:result.afterHttp?.status,testExit:result.afterTests?.exitCode,tools:result.events.map(row=>row.tool),hasDiff:!!result.diff}));
+assert.equal(result.state,'review');assert.equal(result.regressionBefore?.exitCode,1);assert.ok(result.regressionBefore?.testSummary?.complete);assert.equal(result.afterHttp?.status,200);assert.equal(result.afterTests?.exitCode,0);assert.match(result.diff,/app\.mjs/);assert.equal(await readFile(resolve('fixtures/http500-site/app.mjs'),'utf8'),original);
+console.log('VERIFIED: real Codex read, edited an isolated Git worktree, added regression tests; actual tests and HTTP 500 -> 200 passed. No Liara operations.');

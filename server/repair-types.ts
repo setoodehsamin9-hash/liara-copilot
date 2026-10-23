@@ -1,0 +1,3 @@
+import type {CommandResult} from './repair-workspace.js';
+export type RepairView={id:string;label:string;fixture:boolean;checkoutBaseline?:boolean;state:'analyzed'|'repairing'|'review'|'failed';sourceRevision:string;revision?:string;branch:string;files:string[];changedFiles?:string[];diff:string;summary:string;beforeTests:CommandResult;afterTests?:CommandResult;regressionBefore?:CommandResult;beforeHttp?:{status:number;body:string;fetchedAt:string};afterHttp?:{status:number;body:string;fetchedAt:string};events:{tool:string;path?:string;at:string}[];error?:string};
+export type RepairEvent={type:'progress';message:string}|{type:'result';repair:RepairView}|{type:'error';message:string}|{type:'done';status:'completed'|'failed'};

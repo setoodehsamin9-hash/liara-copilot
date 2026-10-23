@@ -1,0 +1,13 @@
+{
+  "provenance": "Sanitized live durable/reconciliation observation, not an upstream upload response",
+  "checkedAt": "2026-10-23T04:51:32.086Z",
+  "operationId": "ecc31859-75cd-465d-a435-3ed90f7efeae",
+  "state": "uncertain",
+  "lastStep": "upload_dispatched",
+  "sourceID": null,
+  "releaseID": null,
+  "approvalState": "consumed",
+  "currentRelease": null,
+  "failure": null,
+  "artifactDigest": "sha256:e61a9bad6e79367108384f4912f9b569c102c20be90e1baf71f2868e49b32185"
+}
